@@ -11,21 +11,26 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<junit.version>5.10.2</junit.version>  </properties>
+    <junit.version>5.10.2</junit.version> <!-- Corrige la posición de esta propiedad -->
+  </properties>
 
   <dependencies>
+    <!-- Dependencia para JavaFX Controls -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
       <version>22.0.1</version>
     </dependency>
+
+    <!-- Dependencia para JavaFX FXML -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
       <version>22.0.1</version>
     </dependency>
 
-<dependency>
+    <!-- Dependencias para JUnit (pruebas) -->
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>${junit.version}</version>
@@ -36,29 +41,39 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>  </dependencies>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>20.0.2</version> <!-- Cambia según la versión de JavaFX -->
+    </dependency>
+  </dependencies>
 
   <build>
     <plugins>
+      <!-- Plugin de compilador de Maven -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-          <source>22</source>
-          <target>22</target>
+          <!-- Asegúrate de que estás usando una versión de Java compatible -->
+          <source>17</source> <!-- Usa 17 o la versión que estés usando -->
+          <target>17</target> <!-- Usa 17 o la versión que estés usando -->
         </configuration>
       </plugin>
+
+      <!-- Plugin de JavaFX -->
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <executions>
           <execution>
-            <!-- Default configuration for running with: mvn clean javafx:run -->
             <id>default-cli</id>
             <configuration>
-              <mainClass>com.example.proyectofinalprimero/com.example.proyectofinalprimero.HelloApplication</mainClass>
+              <!-- Asegúrate de que el mainClass esté correctamente configurado -->
+              <mainClass>com.example.proyectofinalprimero.HelloApplication</mainClass>
               <launcher>app</launcher>
               <jlinkZipName>app</jlinkZipName>
               <jlinkImageName>app</jlinkImageName>

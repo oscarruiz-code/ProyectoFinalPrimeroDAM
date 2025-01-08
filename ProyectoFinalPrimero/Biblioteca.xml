@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Biblioteca>
+    <Libro>
+        <Titulo>Mori</Titulo>
+        <Autor>Mori</Autor>
+        <Genero>Mori</Genero>
+        <ISBN>4567890</ISBN>
+        <Publicacion>2013</Publicacion>
+    </Libro>
+    <Libro>
+        <Titulo>Antonella</Titulo>
+        <Autor>Antonella</Autor>
+        <Genero>Antonella</Genero>
+        <ISBN>2345667</ISBN>
+        <Publicacion>2025</Publicacion>
+    </Libro>
+</Biblioteca>

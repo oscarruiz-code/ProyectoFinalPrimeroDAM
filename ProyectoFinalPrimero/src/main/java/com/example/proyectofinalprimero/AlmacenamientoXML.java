@@ -1,4 +1,4 @@
-package org.example;
+package com.example.proyectofinalprimero;
 
 import org.w3c.dom.Element;
 
@@ -9,7 +9,8 @@ public class AlmacenamientoXML {
 
     ManejadorXML manejadorXML;
 
-    {
+    // Constructor
+    public AlmacenamientoXML() {
         try {
             manejadorXML = new ManejadorXML();
         } catch (IOException e) {
@@ -18,7 +19,6 @@ public class AlmacenamientoXML {
     }
 
     public void guardarEnArchivo(String nombreArchivo) {
-
         ArrayList<Element> elementos = manejadorXML.listarXML();
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
@@ -48,16 +48,24 @@ public class AlmacenamientoXML {
                 String genero = datos[2];
                 int isbn = Integer.parseInt(datos[3]);
                 int publicacion = Integer.parseInt(datos[4]);
+
+                // Crear un nuevo objeto Libro y agregarlo a la lista
                 libros.add(new Libro(titulo, autor, genero, isbn, publicacion));
             }
 
+            // Limpiar los libros actuales en el manejador XML
+            manejadorXML.eliminarTodosLosLibros();
+
+            // Agregar los libros cargados al manejador XML
             for (Libro libro : libros) {
-                manejadorXML.crearXML(libro);
+                manejadorXML.crearXML(libro);  // Crear XML para cada libro cargado.
             }
 
-            System.out.println("Datos cargados correctamente");
+            System.out.println("Datos cargados correctamente.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 }

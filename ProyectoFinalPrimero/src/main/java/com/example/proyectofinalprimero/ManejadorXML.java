@@ -1,4 +1,4 @@
-package org.example;
+package com.example.proyectofinalprimero;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,7 +13,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ManejadorXML {
 
@@ -22,36 +21,36 @@ public class ManejadorXML {
     private Document archivo;
 
     {
-        rootTagName="Biblioteca";
+        rootTagName = "Biblioteca";
     }
 
     public ManejadorXML() throws IOException {
         ManejadorXML.FILE = new File("Biblioteca.xml");
-        if(!ManejadorXML.FILE.exists()) ManejadorXML.FILE.createNewFile();
+        if (!ManejadorXML.FILE.exists()) ManejadorXML.FILE.createNewFile();
     }
-    public ArrayList<Element> listarXML(){
+
+    public ArrayList<Element> listarXML() {
         ArrayList<Element> elements = new ArrayList<>();
-        try{
+        try {
             DocumentBuilderFactory base = DocumentBuilderFactory.newInstance();
             DocumentBuilder estructura = base.newDocumentBuilder();
             archivo = estructura.parse(ManejadorXML.FILE);
             NodeList lista = archivo.getElementsByTagName("Libro");
 
-            for(int i = 0; i<lista.getLength();i++){
+            for (int i = 0; i < lista.getLength(); i++) {
                 Node node = lista.item(i);
-                if(node.getNodeType()==Node.ELEMENT_NODE){
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     elements.add(element);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return elements;
     }
 
     private void eliminarEspacioEnBlanco(Node node) {
-
         NodeList children = node.getChildNodes();
         for (int i = children.getLength() - 1; i >= 0; i--) {
             Node child = children.item(i);
@@ -63,9 +62,37 @@ public class ManejadorXML {
         }
     }
 
-    void crearXML(Libro libro){
+    public void eliminarTodosLosLibros() {
+        try {
+            // Asegurarse de que el archivo XML está cargado en el documento
+            if (archivo == null) {
+                // Si el archivo no está cargado, lo cargamos
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                archivo = builder.parse(ManejadorXML.FILE);  // Cargar el archivo XML
+            }
 
-        try{
+            // Obtener el nodo raíz <Biblioteca>
+            Element biblioteca = archivo.getDocumentElement();
+
+            // Borrar todos los elementos <Libro> dentro de <Biblioteca>
+            NodeList libros = biblioteca.getElementsByTagName("Libro");
+            while (libros.getLength() > 0) {
+                Node libro = libros.item(0);
+                biblioteca.removeChild(libro);
+            }
+
+            // Guardar los cambios
+            System.out.println("Todos los libros han sido eliminados.");
+            subirCambios(archivo);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void crearXML(Libro libro) {
+        try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder plantilla;
             try {
@@ -75,13 +102,10 @@ public class ManejadorXML {
             }
 
             if (ManejadorXML.FILE.length() == 0) {
-
                 archivo = plantilla.newDocument();
                 Element raiz = archivo.createElement(rootTagName);
                 archivo.appendChild(raiz);
-
             } else {
-
                 archivo = plantilla.parse(ManejadorXML.FILE);
             }
 
@@ -109,219 +133,127 @@ public class ManejadorXML {
             publicacion.appendChild(archivo.createTextNode(String.valueOf(libro.getPublicacion())));
             nuevoLibro.appendChild(publicacion);
 
-
             subirCambios(archivo);
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    public void agregarLibro() {
-        try {
-
-            Scanner scanner = new Scanner(System.in);
-
-            System.out.print("Ingrese el título del libro: ");
-            String titulo = scanner.nextLine();
-
-            System.out.print("Ingrese el autor del libro: ");
-            String autor = scanner.nextLine();
-
-            System.out.print("Ingrese el género del libro: ");
-            String genero = scanner.nextLine();
-
-            System.out.print("Ingrese el ISBN del libro: ");
-            Integer isbn = scanner.nextInt();
-
-            System.out.print("Ingrese el año de publicación: ");
-            Integer publicacion = scanner.nextInt();
-
-            Libro libro = new Libro(titulo, autor, genero, isbn, publicacion);
-
-            crearXML(libro);
-
-            System.out.println("Libro creado correctamente." + "\n" + "-----------------------------"+"\n");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void actualizar() {
-
+    public boolean actualizar(Libro libro) {
         ArrayList<Element> elementos = listarXML();
-
-        System.out.println("Lista de ISBN : ");
-        for (int i = 0; i < elementos.size(); i++) {
-
-            String nuestrosIsbn = elementos.get(i).getElementsByTagName("ISBN").item(0).getTextContent();
-            System.out.println((i + 1) + ". " + nuestrosIsbn);
-
-        }
-
-        System.out.println("¿Cual quiero modificar?");
-        Scanner sc = new Scanner(System.in);
-        String isbnSeleccionado = sc.nextLine();
 
         Element libroSeleccionado = null;
         for (Element elemento : elementos) {
             String isbn = elemento.getElementsByTagName("ISBN").item(0).getTextContent();
-            if (isbn.equals(isbnSeleccionado)) {
+            if (isbn.equals(String.valueOf(libro.getIsbn()))) {
                 libroSeleccionado = elemento;
                 break;
             }
         }
 
         if (libroSeleccionado == null) {
-            System.out.println("No se encontró el libro con el isbn seleccionado.");
+            return false;
         }
 
-        System.out.print("Ingrese el nuevo titulo: ");
-        String nuevoTitulo = sc.nextLine();
-        if (!nuevoTitulo.isEmpty()) {
-            libroSeleccionado.getElementsByTagName("Titulo").item(0).setTextContent(nuevoTitulo);
+        if (!libro.getTitulo().isEmpty()) {
+            libroSeleccionado.getElementsByTagName("Titulo").item(0).setTextContent(libro.getTitulo());
         }
-
-        System.out.print("Ingrese el nuevo autor: ");
-        String nuevoAutor = sc.nextLine();
-        if (!nuevoAutor.isEmpty()) {
-            libroSeleccionado.getElementsByTagName("Autor").item(0).setTextContent(nuevoAutor);
+        if (!libro.getAutor().isEmpty()) {
+            libroSeleccionado.getElementsByTagName("Autor").item(0).setTextContent(libro.getAutor());
         }
-
-        System.out.print("Ingrese el nuevo género: ");
-        String nuevoGenero = sc.nextLine();
-        if (!nuevoGenero.isEmpty()) {
-            libroSeleccionado.getElementsByTagName("Genero").item(0).setTextContent(nuevoGenero);
+        if (!libro.getGenero().isEmpty()) {
+            libroSeleccionado.getElementsByTagName("Genero").item(0).setTextContent(libro.getGenero());
         }
-
-        System.out.print("Ingrese el nuevo ISBN: ");
-        String nuevoIsbn = sc.nextLine();
-        if (!nuevoIsbn.isEmpty()) {
-            libroSeleccionado.getElementsByTagName("ISBN").item(0).setTextContent(nuevoIsbn);
+        if (libro.getIsbn() != 0) {
+            libroSeleccionado.getElementsByTagName("ISBN").item(0).setTextContent(String.valueOf(libro.getIsbn()));
         }
-
-        System.out.print("Ingrese el nuevo año de publicación: ");
-        String nuevoPublicacion = sc.nextLine();
-        if (!nuevoPublicacion.isEmpty()) {
-            libroSeleccionado.getElementsByTagName("Publicacion").item(0).setTextContent(nuevoPublicacion);
+        if (libro.getPublicacion() != 0) {
+            libroSeleccionado.getElementsByTagName("Publicacion").item(0).setTextContent(String.valueOf(libro.getPublicacion()));
         }
 
         subirCambios(archivo);
-
-        System.out.println("Libro actualizado correctamente." + "\n" + "-----------------------------"+"\n");
+        return false;
     }
 
-    public void eliminar() {
-
+    public boolean eliminar(int isbn) {
         ArrayList<Element> elementos = listarXML();
-
-        System.out.println("Lista de ISBN : ");
-        for (int i = 0; i < elementos.size(); i++) {
-
-            String nuestrosIsbn = elementos.get(i).getElementsByTagName("ISBN").item(0).getTextContent();
-            System.out.println((i + 1) + ". " + nuestrosIsbn);
-
-        }
-
-        System.out.println("¿Cual quiero modificar?");
-        Scanner sc = new Scanner(System.in);
-        String isbnSeleccionado = sc.nextLine();
 
         Element libroSeleccionado = null;
         for (Element elemento : elementos) {
-            String isbn = elemento.getElementsByTagName("ISBN").item(0).getTextContent();
-            if (isbn.equals(isbnSeleccionado)) {
+            String isbnElemento = elemento.getElementsByTagName("ISBN").item(0).getTextContent();
+            if (isbnElemento.equals(String.valueOf(isbn))) {
                 libroSeleccionado = elemento;
                 break;
             }
         }
 
-        if (libroSeleccionado == null) {
-            System.out.println("No se encontró el libro con el isbn seleccionado.");
+        if (libroSeleccionado != null) {
+            Node nodepadre = libroSeleccionado.getParentNode();
+            nodepadre.removeChild(libroSeleccionado);
+            subirCambios(archivo);
         }
-
-        Node nodepadre = libroSeleccionado.getParentNode();
-        nodepadre.removeChild(libroSeleccionado);
-
-        subirCambios(archivo);
-
-        System.out.println("Libro eliminado correctamente." + "\n" + "-----------------------------"+"\n");
-
+        return false;
     }
 
-    public void buscarLibro() {
-
-        while (true) {
-
-            System.out.println("Buscar por: ");
-            System.out.println("1. Título");
-            System.out.println("2. Autor");
-            System.out.println("3. Género" + "\n");
-            System.out.print("Seleccione por lo que quiere buscar: ");
-            Scanner sc = new Scanner(System.in);
-
-            int opcion = sc.nextInt();
-            sc.nextLine();
-            System.out.print("Ingrese el dato : ");
-            String nombre = sc.nextLine();
-
-            ArrayList<Element> elementos = listarXML();
-            boolean encontrado = false;
-
-            for (Element libro : elementos) {
-
-                String valor = "";
-
-                if (opcion == 1) {
-                    valor = libro.getElementsByTagName("Titulo").item(0).getTextContent();
-                } else if (opcion == 2) {
-                    valor = libro.getElementsByTagName("Autor").item(0).getTextContent();
-                } else if (opcion == 3) {
-                    valor = libro.getElementsByTagName("Genero").item(0).getTextContent();
-                } else {
-                    System.out.println("Opción no válida.");
-                }
-
-                if (valor.equalsIgnoreCase(nombre)) {
-                    System.out.println("\n" + "Título: " + libro.getElementsByTagName("Titulo").item(0).getTextContent());
-                    System.out.println("Autor: " + libro.getElementsByTagName("Autor").item(0).getTextContent());
-                    System.out.println("Género: " + libro.getElementsByTagName("Genero").item(0).getTextContent());
-                    System.out.println("ISBN: " + libro.getElementsByTagName("ISBN").item(0).getTextContent());
-                    System.out.println("Publicación: " + libro.getElementsByTagName("Publicacion").item(0).getTextContent());
-                    System.out.println("-----------------------------");
-                    encontrado = true;
-                }
-            }
-
-            if (!encontrado) {
-                System.out.println("No se encontraron libros con ese criterio.");
-            }
-
-            System.out.println("Libro encontrado correctamente." + "\n" + "-----------------------------"+"\n");
-            break;
-        }
-    }
-
-    public void listarCatalogo() {
-
+    public ArrayList<Libro> buscarLibro(String criterio, String valor) {
+        ArrayList<Libro> librosEncontrados = new ArrayList<>();
         ArrayList<Element> elementos = listarXML();
-
-        elementos.sort((e1, e2) -> {
-            int ano1 = Integer.parseInt(e1.getElementsByTagName("Publicacion").item(0).getTextContent());
-            int ano2 = Integer.parseInt(e2.getElementsByTagName("Publicacion").item(0).getTextContent());
-            return Integer.compare(ano1, ano2);
-        });
 
         for (Element libro : elementos) {
+            String valorBusqueda = "";
 
-            System.out.println("Título: " + libro.getElementsByTagName("Titulo").item(0).getTextContent());
-            System.out.println("Autor: " + libro.getElementsByTagName("Autor").item(0).getTextContent());
-            System.out.println("Género: " + libro.getElementsByTagName("Genero").item(0).getTextContent());
-            System.out.println("ISBN: " + libro.getElementsByTagName("ISBN").item(0).getTextContent());
-            System.out.println("Publicación: " + libro.getElementsByTagName("Publicacion").item(0).getTextContent());
-            System.out.println("-----------------------------" + "\n");
+            // Usamos if en lugar de switch para comparar el criterio
+            if (criterio.equalsIgnoreCase("titulo")) {
+                valorBusqueda = libro.getElementsByTagName("Titulo").item(0).getTextContent();
+            } else if (criterio.equalsIgnoreCase("autor")) {
+                valorBusqueda = libro.getElementsByTagName("Autor").item(0).getTextContent();
+            } else if (criterio.equalsIgnoreCase("genero")) {
+                valorBusqueda = libro.getElementsByTagName("Genero").item(0).getTextContent();
+            }
+
+            // Comprobamos si el valor buscado coincide con el valor introducido
+            if (valorBusqueda.equalsIgnoreCase(valor)) {
+                // Si el libro coincide con el criterio, creamos el objeto Libro y lo agregamos
+                String titulo = libro.getElementsByTagName("Titulo").item(0).getTextContent();
+                String autor = libro.getElementsByTagName("Autor").item(0).getTextContent();
+                String genero = libro.getElementsByTagName("Genero").item(0).getTextContent();
+                Integer isbn = Integer.parseInt(libro.getElementsByTagName("ISBN").item(0).getTextContent());
+                Integer publicacion = Integer.parseInt(libro.getElementsByTagName("Publicacion").item(0).getTextContent());
+
+                Libro libroEncontrado = new Libro(titulo, autor, genero, isbn, publicacion);
+                librosEncontrados.add(libroEncontrado);
+            }
         }
+
+        return librosEncontrados;  // Devolver la lista de libros encontrados
+    }
+
+    public ArrayList<Libro> listarCatalogo() {
+        // Obtener los elementos (libros) de la lista XML
+        ArrayList<Element> elementos = listarXML();
+
+        // Crear una lista para almacenar los libros
+        ArrayList<Libro> libros = new ArrayList<>();
+
+        // Convertir los elementos XML a objetos Libro
+        for (Element e : elementos) {
+            String titulo = e.getElementsByTagName("Titulo").item(0).getTextContent();
+            String autor = e.getElementsByTagName("Autor").item(0).getTextContent();
+            String genero = e.getElementsByTagName("Genero").item(0).getTextContent();
+            Integer isbn = Integer.parseInt(e.getElementsByTagName("ISBN").item(0).getTextContent());
+            Integer publicacion = Integer.parseInt(e.getElementsByTagName("Publicacion").item(0).getTextContent());
+
+            // Crear un objeto Libro y añadirlo a la lista
+            Libro libro = new Libro(titulo, autor, genero, isbn, publicacion);
+            libros.add(libro);
+        }
+
+        // Ordenar la lista de libros por año de publicación
+        libros.sort((libro1, libro2) -> Integer.compare(libro1.getPublicacion(), libro2.getPublicacion()));
+
+        // Devolver la lista de libros ordenada
+        return libros;
     }
 
     private void subirCambios(Document archivo) {
@@ -337,6 +269,4 @@ public class ManejadorXML {
             e.printStackTrace();
         }
     }
-
 }
-

@@ -1,60 +1,84 @@
-package org.example;
+package com.example.proyectofinalprimero;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Libro {
 
-    private String titulo;
-    private String autor;
-    private String genero;
-    private Integer isbn;
-    private Integer publicacion;
+    private StringProperty titulo;
+    private StringProperty autor;
+    private StringProperty genero;
+    private IntegerProperty isbn;
+    private IntegerProperty publicacion;
 
     public Libro(String titulo, String autor, String genero, Integer isbn, Integer publicacion) {
 
-        this.titulo = titulo;
-        this.autor = autor;
-        this.genero = genero;
-        this.isbn = isbn;
-        this.publicacion = publicacion;
-
+        this.titulo = new SimpleStringProperty(titulo);
+        this.autor = new SimpleStringProperty(autor);
+        this.genero = new SimpleStringProperty(genero);
+        this.isbn = new SimpleIntegerProperty(isbn);
+        this.publicacion = new SimpleIntegerProperty(publicacion);
     }
 
     public String getTitulo() {
-        return titulo;
+        return titulo.get();
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        this.titulo.set(titulo);
+    }
+
+    public StringProperty tituloProperty() {
+        return titulo;
     }
 
     public String getAutor() {
-        return autor;
+        return autor.get();
     }
 
     public void setAutor(String autor) {
-        this.autor = autor;
+        this.autor.set(autor);
+    }
+
+    public StringProperty autorProperty() {
+        return autor;
     }
 
     public String getGenero() {
-        return genero;
+        return genero.get();
     }
 
     public void setGenero(String genero) {
-        this.genero = genero;
+        this.genero.set(genero);
+    }
+
+    public StringProperty generoProperty() {
+        return genero;
     }
 
     public Integer getIsbn() {
-        return isbn;
+        return isbn.get();
     }
 
     public void setIsbn(Integer isbn) {
-        this.isbn = isbn;
+        this.isbn.set(isbn);
+    }
+
+    public IntegerProperty isbnProperty() {
+        return isbn;
     }
 
     public Integer getPublicacion() {
-        return publicacion;
+        return publicacion.get();
     }
 
     public void setPublicacion(Integer publicacion) {
-        this.publicacion = publicacion;
+        this.publicacion.set(publicacion);
+    }
+
+    public IntegerProperty publicacionProperty() {
+        return publicacion;
     }
 }
