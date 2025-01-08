@@ -165,18 +165,16 @@ public class ManejadorXML {
         if (!libro.getGenero().isEmpty()) {
             libroSeleccionado.getElementsByTagName("Genero").item(0).setTextContent(libro.getGenero());
         }
-        if (libro.getIsbn() != 0) {
-            libroSeleccionado.getElementsByTagName("ISBN").item(0).setTextContent(String.valueOf(libro.getIsbn()));
-        }
         if (libro.getPublicacion() != 0) {
             libroSeleccionado.getElementsByTagName("Publicacion").item(0).setTextContent(String.valueOf(libro.getPublicacion()));
         }
 
         subirCambios(archivo);
-        return false;
+        return true;
     }
 
-    public boolean eliminar(int isbn) {
+
+    public boolean eliminar(Long isbn) {
         ArrayList<Element> elementos = listarXML();
 
         Element libroSeleccionado = null;
@@ -189,16 +187,18 @@ public class ManejadorXML {
         }
 
         if (libroSeleccionado != null) {
-            Node nodepadre = libroSeleccionado.getParentNode();
-            nodepadre.removeChild(libroSeleccionado);
+            Node nodePadre = libroSeleccionado.getParentNode();
+            nodePadre.removeChild(libroSeleccionado);
             subirCambios(archivo);
+            return true; // Devolver true si se eliminó correctamente
         }
         return false;
     }
 
+
     public ArrayList<Libro> buscarLibro(String criterio, String valor) {
         ArrayList<Libro> librosEncontrados = new ArrayList<>();
-        ArrayList<Element> elementos = listarXML();
+        ArrayList<Element> elementos = listarXML();  // Suponiendo que esta función devuelve los elementos XML
 
         for (Element libro : elementos) {
             String valorBusqueda = "";
@@ -218,14 +218,28 @@ public class ManejadorXML {
                 String titulo = libro.getElementsByTagName("Titulo").item(0).getTextContent();
                 String autor = libro.getElementsByTagName("Autor").item(0).getTextContent();
                 String genero = libro.getElementsByTagName("Genero").item(0).getTextContent();
-                Integer isbn = Integer.parseInt(libro.getElementsByTagName("ISBN").item(0).getTextContent());
-                Integer publicacion = Integer.parseInt(libro.getElementsByTagName("Publicacion").item(0).getTextContent());
 
-                Libro libroEncontrado = new Libro(titulo, autor, genero, isbn, publicacion);
-                librosEncontrados.add(libroEncontrado);
+                // Usamos try-catch para evitar excepciones si no se pueden convertir los valores
+                Long isbn = null;
+                Integer publicacion = null;
+                try {
+                    isbn = Long.parseLong(libro.getElementsByTagName("ISBN").item(0).getTextContent());
+                } catch (NumberFormatException e) {
+                    // Si ocurre un error al parsear el ISBN, podemos manejarlo de forma adecuada
+                    System.out.println("ISBN inválido: " + libro.getElementsByTagName("ISBN").item(0).getTextContent());
+                }
+                try {
+                    publicacion = Integer.parseInt(libro.getElementsByTagName("Publicacion").item(0).getTextContent());
+                } catch (NumberFormatException e) {
+                    // Si ocurre un error al parsear la fecha de publicación, podemos manejarlo de forma adecuada
+                    System.out.println("Fecha de publicación inválida: " + libro.getElementsByTagName("Publicacion").item(0).getTextContent());
+                }
+                if (isbn != null && publicacion != null) {
+                    Libro libroEncontrado = new Libro(titulo, autor, genero, isbn, publicacion);
+                    librosEncontrados.add(libroEncontrado);
+                }
             }
         }
-
         return librosEncontrados;  // Devolver la lista de libros encontrados
     }
 
@@ -241,7 +255,7 @@ public class ManejadorXML {
             String titulo = e.getElementsByTagName("Titulo").item(0).getTextContent();
             String autor = e.getElementsByTagName("Autor").item(0).getTextContent();
             String genero = e.getElementsByTagName("Genero").item(0).getTextContent();
-            Integer isbn = Integer.parseInt(e.getElementsByTagName("ISBN").item(0).getTextContent());
+            Long isbn =Long.parseLong(e.getElementsByTagName("ISBN").item(0).getTextContent());
             Integer publicacion = Integer.parseInt(e.getElementsByTagName("Publicacion").item(0).getTextContent());
 
             // Crear un objeto Libro y añadirlo a la lista
@@ -265,8 +279,11 @@ public class ManejadorXML {
             DOMSource source = new DOMSource(archivo);
             StreamResult result = new StreamResult(ManejadorXML.FILE);
             transformer.transform(source, result);
+            System.out.println("Cambios subidos correctamente.");
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error al subir los cambios: " + e.getMessage());
         }
     }
+
 }

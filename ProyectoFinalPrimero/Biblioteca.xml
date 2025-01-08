@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Biblioteca>
     <Libro>
-        <Titulo>Mori</Titulo>
-        <Autor>Mori</Autor>
-        <Genero>Mori</Genero>
-        <ISBN>4567890</ISBN>
-        <Publicacion>2013</Publicacion>
+        <Titulo>1984</Titulo>
+        <Autor>George Orwell</Autor>
+        <Genero>Distopía</Genero>
+        <ISBN>9780451524935</ISBN>
+        <Publicacion>1949</Publicacion>
     </Libro>
     <Libro>
-        <Titulo>Antonella</Titulo>
-        <Autor>Antonella</Autor>
-        <Genero>Antonella</Genero>
-        <ISBN>2345667</ISBN>
-        <Publicacion>2025</Publicacion>
+        <Titulo>Fahrenheit 451</Titulo>
+        <Autor>Ray Bradbury</Autor>
+        <Genero>Ciencia ficción</Genero>
+        <ISBN>9781</ISBN>
+        <Publicacion>1953</Publicacion>
+    </Libro>
+    <Libro>
+        <Titulo>Odiseo</Titulo>
+        <Autor>Perpo</Autor>
+        <Genero>Epico</Genero>
+        <ISBN>9788</ISBN>
+        <Publicacion>2001</Publicacion>
+    </Libro>
+    <Libro>
+        <Titulo>Los Miserables</Titulo>
+        <Autor>Victor Hugo</Autor>
+        <Genero>Drama</Genero>
+        <ISBN>978014</ISBN>
+        <Publicacion>1862</Publicacion>
     </Libro>
 </Biblioteca>

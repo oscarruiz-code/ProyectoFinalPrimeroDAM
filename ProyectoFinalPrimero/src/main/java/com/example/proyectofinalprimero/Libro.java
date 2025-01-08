@@ -1,7 +1,9 @@
 package com.example.proyectofinalprimero;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -10,15 +12,14 @@ public class Libro {
     private StringProperty titulo;
     private StringProperty autor;
     private StringProperty genero;
-    private IntegerProperty isbn;
+    private LongProperty isbn;
     private IntegerProperty publicacion;
 
-    public Libro(String titulo, String autor, String genero, Integer isbn, Integer publicacion) {
-
+    public Libro(String titulo, String autor, String genero, Long isbn, Integer publicacion) {
         this.titulo = new SimpleStringProperty(titulo);
         this.autor = new SimpleStringProperty(autor);
         this.genero = new SimpleStringProperty(genero);
-        this.isbn = new SimpleIntegerProperty(isbn);
+        this.isbn = new SimpleLongProperty(isbn);
         this.publicacion = new SimpleIntegerProperty(publicacion);
     }
 
@@ -58,15 +59,15 @@ public class Libro {
         return genero;
     }
 
-    public Integer getIsbn() {
+    public Long getIsbn() {
         return isbn.get();
     }
 
-    public void setIsbn(Integer isbn) {
+    public void setIsbn(Long isbn) {
         this.isbn.set(isbn);
     }
 
-    public IntegerProperty isbnProperty() {
+    public LongProperty isbnProperty() {
         return isbn;
     }
 

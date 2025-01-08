@@ -46,7 +46,7 @@ public class AlmacenamientoXML {
                 String titulo = datos[0];
                 String autor = datos[1];
                 String genero = datos[2];
-                int isbn = Integer.parseInt(datos[3]);
+                Long isbn = Long.parseLong(datos[3]);
                 int publicacion = Integer.parseInt(datos[4]);
 
                 // Crear un nuevo objeto Libro y agregarlo a la lista
@@ -66,6 +66,4 @@ public class AlmacenamientoXML {
             e.printStackTrace();
         }
     }
-
-
 }

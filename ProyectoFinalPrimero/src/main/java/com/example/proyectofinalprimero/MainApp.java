@@ -17,7 +17,7 @@ public class MainApp extends Application {
         HelloController controller = loader.getController();
         controller.setPrimaryStage(primaryStage);
 
-        primaryStage.setTitle("Gestión de Biblioteca");
+        primaryStage.setTitle("Biblioteca Pix4ke");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
