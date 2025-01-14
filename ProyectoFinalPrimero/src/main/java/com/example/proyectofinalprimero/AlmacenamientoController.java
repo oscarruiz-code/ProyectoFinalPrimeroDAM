@@ -10,6 +10,15 @@ import java.io.File;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
+
+/**
+ * Controlador para la gestión del almacenamiento en la aplicación.
+ * Permite guardar y cargar datos desde archivos de texto.
+ * También proporciona la funcionalidad para volver al menú principal.
+ *
+ * @version 1.0
+ * @author oscarruiz-code
+ */
 public class AlmacenamientoController {
 
     @FXML
@@ -25,10 +34,18 @@ public class AlmacenamientoController {
 
     private AlmacenamientoXML almacenamientoXML;
 
+    /**
+     * Constructor de la clase AlmacenamientoController.
+     * Inicializa una nueva instancia de AlmacenamientoXML.
+     */
     public AlmacenamientoController() {
         almacenamientoXML = new AlmacenamientoXML();
     }
 
+    /**
+     * Método llamado cuando se hace clic en el botón Guardar.
+     * Abre un cuadro de diálogo para seleccionar el archivo donde se guardarán los datos.
+     */
     @FXML
     public void onGuardar() {
         FileChooser fileChooser = new FileChooser();
@@ -44,6 +61,10 @@ public class AlmacenamientoController {
         }
     }
 
+    /**
+     * Método llamado cuando se hace clic en el botón Cargar.
+     * Abre un cuadro de diálogo para seleccionar el archivo desde donde se cargarán los datos.
+     */
     @FXML
     public void onCargar() {
         FileChooser fileChooser = new FileChooser();
@@ -59,6 +80,12 @@ public class AlmacenamientoController {
         }
     }
 
+    /**
+     * Método llamado cuando se hace clic en el botón Volver.
+     * Cambia la escena a la vista del menú principal.
+     *
+     * @throws IOException Si hay un error al cargar la vista del menú principal.
+     */
     @FXML
     public void onVolver() throws IOException {
         // Cambiar la escena a la vista del menú principal sin depender de txtOutput

@@ -11,16 +11,31 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controlador principal de la aplicación.
+ * Gestiona la navegación entre diferentes pantallas.
+ *
+ * @version 1.0
+ * @autor oscarruiz-code
+ */
 public class HelloController {
 
     // Referencia al Stage principal
     private Stage primaryStage;
 
-    // Setter para el Stage principal
+    /**
+     * Establece el Stage principal de la aplicación.
+     *
+     * @param stage El Stage principal.
+     */
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }
 
+    /**
+     * Maneja el evento de gestionar libros.
+     * Carga y muestra la pantalla de gestión de libros.
+     */
     @FXML
     public void handleGestionarLibros() {
         try {
@@ -39,6 +54,12 @@ public class HelloController {
         }
     }
 
+    /**
+     * Maneja el evento de almacenamiento.
+     * Carga y muestra la pantalla de almacenamiento.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     public void handleAlmacenamiento(ActionEvent event) {
         try {
@@ -58,6 +79,10 @@ public class HelloController {
         }
     }
 
+    /**
+     * Maneja el evento de salir.
+     * Cierra la aplicación.
+     */
     @FXML
     public void handleSalir() {
         System.exit(0);  // Salir de la aplicación

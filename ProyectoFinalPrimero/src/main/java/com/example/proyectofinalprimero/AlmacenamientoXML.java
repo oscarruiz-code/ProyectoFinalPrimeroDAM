@@ -1,15 +1,23 @@
 package com.example.proyectofinalprimero;
 
 import org.w3c.dom.Element;
-
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Clase que gestiona el almacenamiento y la recuperación de datos en archivos XML.
+ *
+ * @version 1.0
+ * @autor oscarruiz-code
+ */
 public class AlmacenamientoXML {
 
     ManejadorXML manejadorXML;
 
-    // Constructor
+    /**
+     * Constructor de la clase AlmacenamientoXML.
+     * Inicializa una nueva instancia de ManejadorXML.
+     */
     public AlmacenamientoXML() {
         try {
             manejadorXML = new ManejadorXML();
@@ -18,6 +26,11 @@ public class AlmacenamientoXML {
         }
     }
 
+    /**
+     * Guarda los datos en un archivo de texto en el formato especificado.
+     *
+     * @param nombreArchivo Nombre del archivo donde se guardarán los datos.
+     */
     public void guardarEnArchivo(String nombreArchivo) {
         ArrayList<Element> elementos = manejadorXML.listarXML();
 
@@ -37,6 +50,11 @@ public class AlmacenamientoXML {
         }
     }
 
+    /**
+     * Carga los datos desde un archivo de texto.
+     *
+     * @param nombreArchivo Nombre del archivo desde donde se cargarán los datos.
+     */
     public void cargarDesdeArchivo(String nombreArchivo) {
         try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
             ArrayList<Libro> libros = new ArrayList<>();

@@ -47,6 +47,11 @@
         <artifactId>javafx-controls</artifactId>
         <version>20.0.2</version> <!-- Cambia según la versión de JavaFX -->
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.26</version>
+    </dependency>
   </dependencies>
 
   <build>

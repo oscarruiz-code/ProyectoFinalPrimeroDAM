@@ -14,6 +14,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Clase que maneja las operaciones de lectura, escritura y modificación de un archivo XML
+ * que almacena información de libros en una biblioteca.
+ *
+ * @autor oscarruiz-code
+ */
 public class ManejadorXML {
 
     private static File FILE;
@@ -24,11 +30,21 @@ public class ManejadorXML {
         rootTagName = "Biblioteca";
     }
 
+    /**
+     * Constructor de la clase. Inicializa el archivo XML, creando uno nuevo si no existe.
+     *
+     * @throws IOException Si ocurre un error al crear o acceder al archivo XML.
+     */
     public ManejadorXML() throws IOException {
         ManejadorXML.FILE = new File("Biblioteca.xml");
         if (!ManejadorXML.FILE.exists()) ManejadorXML.FILE.createNewFile();
     }
 
+    /**
+     * Lista todos los elementos <Libro> del archivo XML.
+     *
+     * @return Una lista de elementos <Libro> encontrados en el archivo XML.
+     */
     public ArrayList<Element> listarXML() {
         ArrayList<Element> elements = new ArrayList<>();
         try {
@@ -50,6 +66,11 @@ public class ManejadorXML {
         return elements;
     }
 
+    /**
+     * Elimina todos los espacios en blanco de un nodo XML.
+     *
+     * @param node El nodo cuyo espacio en blanco se desea eliminar.
+     */
     private void eliminarEspacioEnBlanco(Node node) {
         NodeList children = node.getChildNodes();
         for (int i = children.getLength() - 1; i >= 0; i--) {
@@ -62,11 +83,15 @@ public class ManejadorXML {
         }
     }
 
+    /**
+     * Elimina todos los libros del archivo XML.
+     *
+     * @throws IOException Si ocurre un error al procesar el archivo.
+     */
     public void eliminarTodosLosLibros() {
         try {
             // Asegurarse de que el archivo XML está cargado en el documento
             if (archivo == null) {
-                // Si el archivo no está cargado, lo cargamos
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
                 archivo = builder.parse(ManejadorXML.FILE);  // Cargar el archivo XML
@@ -91,6 +116,11 @@ public class ManejadorXML {
         }
     }
 
+    /**
+     * Crea un nuevo libro en el archivo XML.
+     *
+     * @param libro El objeto Libro que contiene la información que se desea agregar al archivo XML.
+     */
     void crearXML(Libro libro) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -140,6 +170,12 @@ public class ManejadorXML {
         }
     }
 
+    /**
+     * Actualiza un libro existente en el archivo XML.
+     *
+     * @param libro El objeto Libro con los datos actualizados.
+     * @return true si el libro fue actualizado correctamente, false si no se encontró.
+     */
     public boolean actualizar(Libro libro) {
         ArrayList<Element> elementos = listarXML();
 
@@ -173,7 +209,12 @@ public class ManejadorXML {
         return true;
     }
 
-
+    /**
+     * Elimina un libro por su ISBN del archivo XML.
+     *
+     * @param isbn El ISBN del libro a eliminar.
+     * @return true si el libro fue eliminado correctamente, false si no se encontró.
+     */
     public boolean eliminar(Long isbn) {
         ArrayList<Element> elementos = listarXML();
 
@@ -195,7 +236,13 @@ public class ManejadorXML {
         return false;
     }
 
-
+    /**
+     * Busca libros que coincidan con un criterio y valor dados.
+     *
+     * @param criterio El criterio de búsqueda (por ejemplo, "titulo", "autor", "genero").
+     * @param valor El valor del criterio de búsqueda.
+     * @return Una lista de libros que coinciden con el criterio y valor de búsqueda.
+     */
     public ArrayList<Libro> buscarLibro(String criterio, String valor) {
         ArrayList<Libro> librosEncontrados = new ArrayList<>();
         ArrayList<Element> elementos = listarXML();  // Suponiendo que esta función devuelve los elementos XML
@@ -225,13 +272,11 @@ public class ManejadorXML {
                 try {
                     isbn = Long.parseLong(libro.getElementsByTagName("ISBN").item(0).getTextContent());
                 } catch (NumberFormatException e) {
-                    // Si ocurre un error al parsear el ISBN, podemos manejarlo de forma adecuada
                     System.out.println("ISBN inválido: " + libro.getElementsByTagName("ISBN").item(0).getTextContent());
                 }
                 try {
                     publicacion = Integer.parseInt(libro.getElementsByTagName("Publicacion").item(0).getTextContent());
                 } catch (NumberFormatException e) {
-                    // Si ocurre un error al parsear la fecha de publicación, podemos manejarlo de forma adecuada
                     System.out.println("Fecha de publicación inválida: " + libro.getElementsByTagName("Publicacion").item(0).getTextContent());
                 }
                 if (isbn != null && publicacion != null) {
@@ -243,6 +288,11 @@ public class ManejadorXML {
         return librosEncontrados;  // Devolver la lista de libros encontrados
     }
 
+    /**
+     * Lista todos los libros en el archivo XML, ordenados por año de publicación.
+     *
+     * @return Una lista de libros ordenada por año de publicación.
+     */
     public ArrayList<Libro> listarCatalogo() {
         // Obtener los elementos (libros) de la lista XML
         ArrayList<Element> elementos = listarXML();
@@ -270,6 +320,11 @@ public class ManejadorXML {
         return libros;
     }
 
+    /**
+     * Guarda los cambios realizados en el archivo XML.
+     *
+     * @param archivo El documento XML con los cambios a guardar.
+     */
     private void subirCambios(Document archivo) {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -285,5 +340,4 @@ public class ManejadorXML {
             System.out.println("Error al subir los cambios: " + e.getMessage());
         }
     }
-
 }
