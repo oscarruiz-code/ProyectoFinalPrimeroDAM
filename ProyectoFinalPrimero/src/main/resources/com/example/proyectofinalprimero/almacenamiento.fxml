@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalprimero.AlmacenamientoController"
-      alignment="CENTER" spacing="20">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="20" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.proyectofinalprimero.controller.AlmacenamientoController">
     <children>
-        <Button text="Guardar en archivo TXT" fx:id="btnGuardar" onAction="#onGuardar" maxWidth="200" />
-        <Button text="Cargar desde archivo TXT" fx:id="btnCargar" onAction="#onCargar" maxWidth="200" />
-        <Label fx:id="txtMensaje" />
-        <Button text="Volver al menú principal" fx:id="btnVolver" onAction="#onVolver" maxWidth="200" />
+      <Pane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="507.0" fitWidth="734.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes/Pix4ke2.jpg" />
+               </image>
+            </ImageView>
+              <Button fx:id="btnGuardar" layoutX="221.0" layoutY="100.0" maxWidth="200" onAction="#onGuardar" prefHeight="35.0" prefWidth="158.0" text="Guardar en archivo TXT" />
+              <Button fx:id="btnCargar" layoutX="217.0" layoutY="151.0" maxWidth="200" onAction="#onCargar" prefHeight="35.0" prefWidth="166.0" text="Cargar desde archivo TXT" />
+              <Label fx:id="txtMensaje" layoutX="152.0" layoutY="238.0" prefHeight="35.0" prefWidth="296.0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+              <Button fx:id="btnVolver" layoutX="221.0" layoutY="324.0" maxWidth="200" onAction="#onVolver" prefHeight="35.0" prefWidth="158.0" text="Volver al menú principal" />
+         </children>
+      </Pane>
     </children>
 </VBox>

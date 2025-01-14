@@ -1,5 +1,7 @@
-package com.example.proyectofinalprimero;
+package com.example.proyectofinalprimero.controller;
 
+import com.example.proyectofinalprimero.model.entity.Libro;
+import com.example.proyectofinalprimero.model.repository.xml.ManejadorXML;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Controlador para la gestión de libros en la aplicación.
@@ -204,7 +207,7 @@ public class GestionLibrosController {
      */
     @FXML
     public void onVolver() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("menu-principal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/proyectofinalprimero/menu-principal.fxml"));
         Stage stage = (Stage) txtOutput.getScene().getWindow();
         stage.setScene(new Scene(root, 600, 400));
         stage.show();

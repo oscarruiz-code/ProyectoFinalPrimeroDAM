@@ -1,5 +1,6 @@
-package com.example.proyectofinalprimero;
+package com.example.proyectofinalprimero.controller;
 
+import com.example.proyectofinalprimero.model.repository.xml.AlmacenamientoXML;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -89,7 +90,7 @@ public class AlmacenamientoController {
     @FXML
     public void onVolver() throws IOException {
         // Cambiar la escena a la vista del menú principal sin depender de txtOutput
-        Parent root = FXMLLoader.load(getClass().getResource("menu-principal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/proyectofinalprimero/menu-principal.fxml"));
         Stage stage = (Stage) btnVolver.getScene().getWindow();  // Obtenemos la ventana desde el botón Volver
         stage.setScene(new Scene(root, 600, 400));  // Ajusta el tamaño de la ventana si es necesario
         stage.show();

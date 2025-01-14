@@ -1,5 +1,6 @@
-package com.example.proyectofinalprimero;
+package com.example.proyectofinalprimero.model.repository.xml;
 
+import com.example.proyectofinalprimero.model.entity.Libro;
 import org.w3c.dom.Element;
 import java.io.*;
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
-package com.example.proyectofinalprimero;
+package com.example.proyectofinalprimero.model.repository.xml;
 
+import com.example.proyectofinalprimero.model.entity.Libro;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -121,7 +122,7 @@ public class ManejadorXML {
      *
      * @param libro El objeto Libro que contiene la información que se desea agregar al archivo XML.
      */
-    void crearXML(Libro libro) {
+    public void crearXML(Libro libro) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder plantilla;

@@ -1,5 +1,6 @@
 package com.example.proyectofinalprimero;
 
+import com.example.proyectofinalprimero.controller.HelloController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,7 +32,7 @@ public class MainApp extends Application {
         HelloController controller = loader.getController();
         controller.setPrimaryStage(primaryStage);
 
-        primaryStage.setTitle("Biblioteca Pix4ke");
+        primaryStage.setTitle("Biblioteca oscarruiz-code");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }

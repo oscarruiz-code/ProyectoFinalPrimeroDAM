@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.proyectofinalprimero.GestionLibrosController" spacing="15" alignment="CENTER">
+      fx:controller="com.example.proyectofinalprimero.controller.GestionLibrosController" spacing="15" alignment="CENTER">
 
     <!-- Título principal -->
     <Label text="Gestión de Biblioteca" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #2C3E50;" />

@@ -1,4 +1,4 @@
-package com.example.proyectofinalprimero;
+package com.example.proyectofinalprimero.model.entity;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.LongProperty;

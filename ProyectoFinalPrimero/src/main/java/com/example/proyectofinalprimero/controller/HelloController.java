@@ -1,4 +1,4 @@
-package com.example.proyectofinalprimero;
+package com.example.proyectofinalprimero.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,7 +37,7 @@ public class HelloController {
      * Carga y muestra la pantalla de gestión de libros.
      */
     @FXML
-    public void handleGestionarLibros() {
+    public void GestionarLibros() {
         try {
             // Cargar el archivo FXML de la pantalla de gestión de libros
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyectofinalprimero/GestionLibros.fxml")); // Ruta correcta
@@ -61,7 +61,7 @@ public class HelloController {
      * @param event El evento de acción.
      */
     @FXML
-    public void handleAlmacenamiento(ActionEvent event) {
+    public void Almacenamiento(ActionEvent event) {
         try {
             // Se corrigió la ruta para que coincida con la ubicación esperada del archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/proyectofinalprimero/almacenamiento.fxml")); // Ruta correcta
@@ -84,7 +84,7 @@ public class HelloController {
      * Cierra la aplicación.
      */
     @FXML
-    public void handleSalir() {
+    public void Salir() {
         System.exit(0);  // Salir de la aplicación
     }
 }

@@ -1,7 +1,4 @@
-package com.example.proyectofinalprimero;
-
-import java.sql.*;
-import java.util.ArrayList;
+package com.example.proyectofinalprimero.model.repository.bd;
 
 public class DatabaseManager {
 /*

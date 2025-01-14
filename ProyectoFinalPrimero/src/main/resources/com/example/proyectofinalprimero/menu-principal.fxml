@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.proyectofinalprimero.HelloController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalprimero.controller.HelloController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <Pane prefHeight="400.0" prefWidth="600.0">
+      <children>
+         <ImageView fitHeight="591.0" fitWidth="904.0" layoutX="-154.0" layoutY="-123.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../imagenes/Pix4ke.jpg" />
+            </image>
+         </ImageView>
 
-    <Text text="Te da la bienvenida Pix4ke" style="-fx-font-size: 20px;"/>
-
-    <Button fx:id="btnGestionarLibros" text="Gestionar Libros" onAction="#handleGestionarLibros"/>
-    <Button fx:id="btnAlmacenamiento" text="Almacenamiento" onAction="#handleAlmacenamiento"/>
-    <Button fx:id="btnSalir" text="Salir" onAction="#handleSalir"/>
+          <Button fx:id="btnGestionarLibros" layoutX="215.0" layoutY="202.0" onAction="#GestionarLibros" prefHeight="35.0" prefWidth="116.0" text="Gestionar Libros" />
+          <Button fx:id="btnAlmacenamiento" layoutX="215.0" layoutY="249.0" onAction="#Almacenamiento" prefHeight="35.0" prefWidth="116.0" text="Almacenamiento" />
+          <Button fx:id="btnSalir" layoutX="249.0" layoutY="298.0" onAction="#Salir" prefHeight="35.0" prefWidth="49.0" text="Salir" />
+      </children>
+   </Pane>
 </VBox>

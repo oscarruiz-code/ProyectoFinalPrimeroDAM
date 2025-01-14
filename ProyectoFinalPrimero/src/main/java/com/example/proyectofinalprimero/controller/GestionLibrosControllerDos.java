@@ -1,14 +1,4 @@
-package com.example.proyectofinalprimero;
-
-import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
-
-import java.io.IOException;
-import java.util.List;
+package com.example.proyectofinalprimero.controller;
 
 public class GestionLibrosControllerDos {
 /*
