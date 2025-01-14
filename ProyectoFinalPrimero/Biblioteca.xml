@@ -14,18 +14,4 @@
         <ISBN>9781</ISBN>
         <Publicacion>1953</Publicacion>
     </Libro>
-    <Libro>
-        <Titulo>Odiseo</Titulo>
-        <Autor>Perpo</Autor>
-        <Genero>Epico</Genero>
-        <ISBN>9788</ISBN>
-        <Publicacion>2001</Publicacion>
-    </Libro>
-    <Libro>
-        <Titulo>Los Miserables</Titulo>
-        <Autor>Victor Hugo</Autor>
-        <Genero>Drama</Genero>
-        <ISBN>978014</ISBN>
-        <Publicacion>1862</Publicacion>
-    </Libro>
 </Biblioteca>

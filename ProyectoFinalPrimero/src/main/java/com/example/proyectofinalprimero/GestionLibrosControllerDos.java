@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GestionLibrosControllerDos {
-
+/*
     @FXML
     private TextField txtTitulo, txtAutor, txtGenero, txtISBN, txtPublicacion;
     @FXML
@@ -185,4 +185,6 @@ public class GestionLibrosControllerDos {
         colISBN.setCellValueFactory(cellData -> cellData.getValue().isbnProperty().asObject());
         colAnoPublicacion.setCellValueFactory(cellData -> cellData.getValue().publicacionProperty().asObject());
     }
+
+ */
 }
