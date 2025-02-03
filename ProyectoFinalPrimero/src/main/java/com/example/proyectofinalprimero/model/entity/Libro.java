@@ -21,16 +21,6 @@ public class Libro {
     private LongProperty isbn;
     private IntegerProperty publicacion;
 
-    /**
-     * Constructor de la clase Libro.
-     * Inicializa los campos del libro con los valores proporcionados.
-     *
-     * @param titulo Título del libro.
-     * @param autor Autor del libro.
-     * @param genero Género del libro.
-     * @param isbn ISBN del libro.
-     * @param publicacion Año de publicación del libro.
-     */
     public Libro(String titulo, String autor, String genero, Long isbn, Integer publicacion) {
         this.titulo = new SimpleStringProperty(titulo);
         this.autor = new SimpleStringProperty(autor);

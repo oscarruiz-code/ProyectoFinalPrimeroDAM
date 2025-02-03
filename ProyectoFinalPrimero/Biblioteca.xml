@@ -8,10 +8,10 @@
         <Publicacion>1949</Publicacion>
     </Libro>
     <Libro>
-        <Titulo>Pocahontas</Titulo>
-        <Autor>Mario Perez</Autor>
-        <Genero>Accion</Genero>
-        <ISBN>9781</ISBN>
-        <Publicacion>2003</Publicacion>
+        <Titulo>Popeye</Titulo>
+        <Autor>Pedro Lorca</Autor>
+        <Genero>Ficcion</Genero>
+        <ISBN>1223113123123</ISBN>
+        <Publicacion>2001</Publicacion>
     </Libro>
 </Biblioteca>
